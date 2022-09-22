@@ -7,15 +7,24 @@ function App() {
 	const [Name, setName] = useState('');
 	const [Num, setNum] = useState('');
 	const [Search, setSearch] = useState(false);
-	const [Loading, setLoading] = useState(true);
+	const [Loading, setLoading] = useState(false);
+	const [Err, setErr] = useState(false);
 	const input = useRef(null);
 
 	const searchPokemon = async () => {
-		let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
-		// console.log(response);
-		setNum(response.data.id);
-		setName(response.data.name);
-		setLoading(false);
+		await axios
+			.get(`https://pokeapi.co/api/v2/pokemon/${Id}`)
+			.then((json) => {
+				setNum(json.data.id);
+				setName(json.data.name);
+				setLoading(false);
+				setErr(false);
+			})
+			.catch((error) => {
+				setLoading(false);
+				setErr(true);
+				console.error('ERROR! sorry man, you sure got the right pokemon id?');
+			});
 	};
 
 	const reset = () => {
@@ -31,6 +40,8 @@ function App() {
 	};
 
 	const search = () => {
+		setLoading(true);
+		if (!input.current.value) return alert('Please Enter a pokemon id.');
 		setSearch(true);
 		searchPokemon();
 		reset();
@@ -52,7 +63,13 @@ function App() {
 			/>
 			<button onClick={search}>search pokemon</button>
 
-			{Search && (Loading ? <p>Loading...</p> : <Card Name={Name} Num={Num} />)}
+			{Loading && <p>Loading...</p>}
+			{Search &&
+				(Err ? (
+					<p>ERROR! sorry man, you sure got the right pokemon id?</p>
+				) : (
+					<Card Name={Name} Num={Num} />
+				))}
 		</>
 	);
 }
