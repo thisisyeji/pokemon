@@ -23,7 +23,7 @@ function Main() {
 			.catch((error) => {
 				setLoading(false);
 				setErr(true);
-				console.error('ERROR! sorry man, you sure got the right pokemon id?');
+				console.error('ERROR! Please check the pokemon id.');
 			});
 	};
 
@@ -40,6 +40,7 @@ function Main() {
 	};
 
 	const search = () => {
+		setErr(false);
 		setLoading(true);
 		if (!input.current.value) return alert('Please Enter a pokemon id.');
 		setSearch(true);
@@ -63,13 +64,18 @@ function Main() {
 			/>
 			<button onClick={search}>search pokemon</button>
 
-			{Loading && <p>Loading...</p>}
-			{Search &&
+			{Loading ? (
+				<p>Loading...</p>
+			) : (
+				Search &&
 				(Err ? (
-					<p>ERROR! sorry man, you sure got the right pokemon id?</p>
+					<p>
+						ERROR! <br /> sorry man, <br /> you sure got the right pokemon id?
+					</p>
 				) : (
 					<Card Name={Name} Num={Num} />
-				))}
+				))
+			)}
 		</>
 	);
 }
