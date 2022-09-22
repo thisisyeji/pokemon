@@ -7,6 +7,7 @@ function App() {
 	const [Name, setName] = useState('');
 	const [Num, setNum] = useState('');
 	const [Search, setSearch] = useState(false);
+	const [Loading, setLoading] = useState(true);
 	const input = useRef(null);
 
 	const searchPokemon = async () => {
@@ -14,6 +15,7 @@ function App() {
 		// console.log(response);
 		setNum(response.data.id);
 		setName(response.data.name);
+		setLoading(false);
 	};
 
 	const reset = () => {
@@ -50,7 +52,7 @@ function App() {
 			/>
 			<button onClick={search}>search pokemon</button>
 
-			{Search ? <Card Name={Name} Num={Num} /> : null}
+			{Search && (Loading ? <p>Loading...</p> : <Card Name={Name} Num={Num} />)}
 		</>
 	);
 }
