@@ -49,20 +49,22 @@ function Main() {
 	};
 
 	return (
-		<>
-			<h1>search your pokemon</h1>
-			<label htmlFor='search'>poke-id:</label>
-			<input
-				onChange={onChange}
-				type='text'
-				placeholder='id'
-				id='search'
-				ref={input}
-				onKeyUp={(e) => {
-					if (e.key === 'Enter') search();
-				}}
-			/>
-			<button onClick={search}>search pokemon</button>
+		<section>
+			<h1>Search Your Pokemon</h1>
+			<div className='search'>
+				<label htmlFor='input'>Poke-Id:</label>
+				<input
+					onChange={onChange}
+					type='text'
+					placeholder='id'
+					id='input'
+					ref={input}
+					onKeyUp={(e) => {
+						if (e.key === 'Enter') search();
+					}}
+				/>
+				<button onClick={search}>Search</button>
+			</div>
 
 			{Loading ? (
 				<p>Loading...</p>
@@ -76,7 +78,7 @@ function Main() {
 					<Card Name={Name} Num={Num} />
 				))
 			)}
-		</>
+		</section>
 	);
 }
 
