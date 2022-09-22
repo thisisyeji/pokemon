@@ -10,7 +10,6 @@ function App() {
 
 	const searchPokemon = async () => {
 		let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
-		console.log(response);
 		setNum(response.data.id);
 		setName(response.data.name);
 		setImg(response.data.sprites.front_default);
@@ -43,6 +42,9 @@ function App() {
 				placeholder='id'
 				id='search'
 				ref={input}
+				onKeyUp={(e) => {
+					if (e.key === 'Enter') search();
+				}}
 			/>
 			<button onClick={search}>search pokemon</button>
 
