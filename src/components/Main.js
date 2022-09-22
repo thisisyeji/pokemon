@@ -11,6 +11,8 @@ function Main() {
 	const [Err, setErr] = useState(false);
 	const input = useRef(null);
 
+	const path = process.env.PUBLIC_URL;
+
 	const searchPokemon = async () => {
 		await axios
 			.get(`https://pokeapi.co/api/v2/pokemon/${Id}`)
@@ -49,8 +51,18 @@ function Main() {
 	};
 
 	return (
-		<section>
-			<h1>Search Your Pokemon</h1>
+		<section
+		// style={{
+		// 	backgroundImage: `url(${path}/img/bg.jpg)`,
+		// 	backgroundPosition: 'center',
+		// 	backgroundRepeat: 'no-repeat',
+		// 	backgroundSize: 'cover',
+		// }}
+		>
+			<h1>
+				Search Your
+				<img src={path + '/img/logo.png'} alt='logo' className='title' />
+			</h1>
 			<div className='search'>
 				<label htmlFor='input'>Poke-Id:</label>
 				<input
@@ -67,11 +79,14 @@ function Main() {
 			</div>
 
 			{Loading ? (
-				<p>Loading...</p>
+				<div className='loading'>
+					<img src={path + '/img/ball.png'} alt='ball' className='ball' />
+					<p>Loading...</p>
+				</div>
 			) : (
 				Search &&
 				(Err ? (
-					<p>
+					<p className='error'>
 						ERROR! <br /> sorry man, <br /> you sure got the right pokemon id?
 					</p>
 				) : (
