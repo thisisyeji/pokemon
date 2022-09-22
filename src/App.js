@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Card from './components/Card.js';
 
 function App() {
 	const [Id, setId] = useState('');
 	const [Name, setName] = useState('');
 	const [Num, setNum] = useState('');
+	const [Search, setSearch] = useState(false);
 	const input = useRef(null);
 
 	const searchPokemon = async () => {
 		let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
-		console.log(response);
+		// console.log(response);
 		setNum(response.data.id);
 		setName(response.data.name);
 	};
@@ -27,6 +29,7 @@ function App() {
 	};
 
 	const search = () => {
+		setSearch(true);
 		searchPokemon();
 		reset();
 	};
@@ -47,15 +50,7 @@ function App() {
 			/>
 			<button onClick={search}>search pokemon</button>
 
-			<div>
-				<h2>#{Num}</h2>
-				<img
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Id}.png`}
-					alt={Name}
-					style={{ width: 300, height: 300 }}
-				/>
-				<h3>{Name}</h3>
-			</div>
+			{Search ? <Card Name={Name} Num={Num} /> : null}
 		</>
 	);
 }
