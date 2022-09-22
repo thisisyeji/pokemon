@@ -35,8 +35,10 @@ section {
 			font-weight: 700;
 		}
 		input {
-			width: 220px;
+			width: 230px;
 			height: 40px;
+			font-size: 16px;
+			color: #333;
 			background-color: transparent;
 			border: none;
 			border-bottom: 2px solid #fff;
@@ -45,6 +47,11 @@ section {
 
 			&:focus {
 				outline: none;
+			}
+
+			&::placeholder {
+				color: #fff;
+				font-size: 15px;
 			}
 		}
 		button {
