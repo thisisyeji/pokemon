@@ -1,7 +1,6 @@
 # 포켓몬 검색 도감
 
-Poke API로 제작한 포켓몬 검색 도감입니다.
-검색 시 띠부띠부씰의 형태로 구현하였습니다.
+Poke API로 제작한 포켓몬 검색 도감으로 검색 시 이미지를 띠부띠부씰의 형태로 구현하였습니다.
 
 ## Table of contents
 
@@ -20,9 +19,8 @@ Poke API로 제작한 포켓몬 검색 도감입니다.
 ### Features
 
 - 포켓몬 Id와 Name으로 검색 기능 구현
-- Web, Tablet, Mobile 크기별 반응형 웹사이트 구현
 - Poke API 활용
-- axios로 데이터 받아오기
+- 검색 시 axios로 데이터 받아오기
 
 ### Screenshot
 
