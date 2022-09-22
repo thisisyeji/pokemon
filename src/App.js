@@ -4,15 +4,14 @@ import axios from 'axios';
 function App() {
 	const [Id, setId] = useState('');
 	const [Name, setName] = useState('');
-	const [Img, setImg] = useState('');
 	const [Num, setNum] = useState('');
 	const input = useRef(null);
 
 	const searchPokemon = async () => {
 		let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
+		console.log(response);
 		setNum(response.data.id);
 		setName(response.data.name);
-		setImg(response.data.sprites.front_default);
 	};
 
 	const reset = () => {
@@ -20,7 +19,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		searchPokemon();
+		if (!Id === '') searchPokemon();
 	}, []);
 
 	const onChange = (e) => {
@@ -50,7 +49,11 @@ function App() {
 
 			<div>
 				<h2>#{Num}</h2>
-				<img src={Img} alt={Name} />
+				<img
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Id}.png`}
+					alt={Name}
+					style={{ width: 300, height: 300 }}
+				/>
 				<h3>{Name}</h3>
 			</div>
 		</>
