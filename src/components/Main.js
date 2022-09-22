@@ -51,14 +51,7 @@ function Main() {
 	};
 
 	return (
-		<section
-		// style={{
-		// 	backgroundImage: `url(${path}/img/bg.jpg)`,
-		// 	backgroundPosition: 'center',
-		// 	backgroundRepeat: 'no-repeat',
-		// 	backgroundSize: 'cover',
-		// }}
-		>
+		<section>
 			<h1>
 				Search Your
 				<img src={path + '/img/logo.png'} alt='logo' className='title' />
@@ -68,7 +61,7 @@ function Main() {
 				<input
 					onChange={onChange}
 					type='text'
-					placeholder='id'
+					placeholder='Please enter a pokemon id.'
 					id='input'
 					ref={input}
 					onKeyUp={(e) => {

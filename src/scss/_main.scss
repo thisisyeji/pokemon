@@ -27,6 +27,7 @@ section {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
 		label {
 			margin-right: 5px;
 			color: navy;
@@ -34,14 +35,26 @@ section {
 			font-weight: 700;
 		}
 		input {
-			width: 200px;
+			width: 220px;
 			height: 40px;
-			padding: 5px;
+			background-color: transparent;
+			border: none;
+			border-bottom: 2px solid #fff;
+			padding: 0px 10px;
+			margin: 0px 10px;
+
+			&:focus {
+				outline: none;
+			}
 		}
 		button {
-			color: navy;
+			background-color: navy;
+			color: #fff;
+			border: none;
+			border-radius: 15px;
 			height: 40px;
-			padding: 5px;
+			padding: 0px 15px;
+			cursor: pointer;
 		}
 	}
 
