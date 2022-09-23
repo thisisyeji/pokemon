@@ -15,20 +15,20 @@ function Main() {
 	const path = process.env.PUBLIC_URL;
 
 	const searchPokemon = async () => {
-		await axios
-			.get(`https://pokeapi.co/api/v2/pokemon/${Id}`)
-			.then((json) => {
-				setNum(json.data.id);
-				setName(json.data.name);
-				setLoading(false);
-				setErr(false);
-				reset();
-			})
-			.catch((error) => {
-				setLoading(false);
-				setErr(true);
-				console.error('ERROR! Please check the pokemon id.');
-			});
+		try {
+			const response = await axios.get(
+				`https://pokeapi.co/api/v2/pokemon/${Id}`
+			);
+			setNum(response.data.id);
+			setName(response.data.name);
+			setErr(false);
+		} catch (error) {
+			setErr(true);
+			console.error(error.message);
+		} finally {
+			setLoading(false);
+			reset();
+		}
 	};
 
 	const reset = () => {
