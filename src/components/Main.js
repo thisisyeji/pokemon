@@ -6,10 +6,11 @@ function Main() {
 	const [Id, setId] = useState('');
 	const [Name, setName] = useState('');
 	const [Num, setNum] = useState('');
+	const [Input, setInput] = useState('');
 	const [Search, setSearch] = useState(false);
 	const [Loading, setLoading] = useState(false);
 	const [Err, setErr] = useState(false);
-	const input = useRef(null);
+	const inputBox = useRef(null);
 
 	const path = process.env.PUBLIC_URL;
 
@@ -21,6 +22,7 @@ function Main() {
 				setName(json.data.name);
 				setLoading(false);
 				setErr(false);
+				reset();
 			})
 			.catch((error) => {
 				setLoading(false);
@@ -30,12 +32,12 @@ function Main() {
 	};
 
 	const reset = () => {
-		input.current.value = '';
+		inputBox.current.value = '';
 	};
 
 	useEffect(() => {
-		if (!Id === '') searchPokemon();
-	}, []);
+		searchPokemon();
+	}, [Input]);
 
 	const onChange = (e) => {
 		setId(e.target.value);
@@ -44,10 +46,9 @@ function Main() {
 	const search = () => {
 		setErr(false);
 		setLoading(true);
-		if (!input.current.value) return alert('Please Enter a pokemon id.');
+		if (!inputBox.current.value) return alert('Please Enter a pokemon id.');
 		setSearch(true);
-		searchPokemon();
-		reset();
+		setInput(Id);
 	};
 
 	return (
@@ -59,11 +60,12 @@ function Main() {
 			<div className='search'>
 				<label htmlFor='input'>Poke-Id:</label>
 				<input
+					value={Id}
 					onChange={onChange}
 					type='text'
 					placeholder='Please enter a pokemon id.'
 					id='input'
-					ref={input}
+					ref={inputBox}
 					onKeyUp={(e) => {
 						if (e.key === 'Enter') search();
 					}}
