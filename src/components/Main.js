@@ -44,9 +44,10 @@ function Main() {
 	};
 
 	const search = () => {
+		if (!inputBox.current.value) return alert('Please Enter a pokemon id.');
+		if (inputBox.current.value === Input) return reset();
 		setErr(false);
 		setLoading(true);
-		if (!inputBox.current.value) return alert('Please Enter a pokemon id.');
 		setSearch(true);
 		setInput(Id);
 	};
