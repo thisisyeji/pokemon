@@ -5,10 +5,12 @@ function Card({ Num, Name }) {
 				<span>#{Num}</span>
 				{Name}
 			</h2>
-			<img
-				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Num}.png`}
-				alt={Name}
-			/>
+			<div className='img_box'>
+				<img
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Num}.png`}
+					alt={Name}
+				/>
+			</div>
 		</div>
 	);
 }
